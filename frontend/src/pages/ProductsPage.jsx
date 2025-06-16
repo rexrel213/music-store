@@ -10,7 +10,7 @@ function Products() {
     const fetchProducts = async () => {
       try {
         setIsLoading(true);
-        const response = await axios.get('http://localhost:8000/products');
+        const response = await axios.get('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/products');
         setProducts(response.data);
       } catch (error) {
         console.error('Ошибка загрузки:', error);

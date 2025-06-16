@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ShoppingBag, Package, Clock, AlertCircle, Loader2, PackageX, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const OrderStatus = ({ status }) => {
   const getStatusColor = () => {

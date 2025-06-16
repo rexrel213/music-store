@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ChevronLeft, Music, Star, ShoppingCart, Heart, Package, Search, Filter, Grid, List, ArrowRight } from 'lucide-react';
 import StarRating from '../context/StarRating';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const CategoryPage = () => {
   const { categoryId } = useParams();

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Package } from 'lucide-react';
 import StarRating from '../context/StarRating';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const HighRatingProducts = () => {
   const [products, setProducts] = useState([]);

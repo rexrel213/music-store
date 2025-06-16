@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Package, ShoppingCart, Heart, ArrowLeft, Loader2 } from 'lucide-react';
 import StarRating from '../context/StarRating';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const BrandPage = () => {
   const { brandId } = useParams();

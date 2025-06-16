@@ -27,7 +27,7 @@ const Avatar = ({ userId, size = 'md', className = '' }) => {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:8000/login/profile/avatar/${userId}?t=${Date.now()}`,
+        `https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/login/profile/avatar/${userId}?t=${Date.now()}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

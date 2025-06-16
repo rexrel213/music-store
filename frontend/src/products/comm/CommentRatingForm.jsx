@@ -8,7 +8,7 @@ const CommentRating = ({ commentId, initialRating, onRatingChange }) => {
   const [totalRating, setTotalRating] = useState(initialRating || 0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
   // Определяем текущую оценку пользователя
   const userVote = userRating?.value;

@@ -5,7 +5,7 @@ import ProfileEditForm from './ProfileEditForm';
 import Avatar from '../context/Avatar';
 import Wishlist from '../favorite/Wishlist';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const Profile = () => {
   const { currentUser, loading, logout, updateUser, uploadAvatar, deleteProfile } = useAuth();
@@ -22,7 +22,7 @@ const Profile = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await fetch('http://localhost:8000/login/profile', {
+      const response = await fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/login/profile', {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
         },

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ShoppingCart, Check, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const AddToCartButton = ({ product, quantity = 1 }) => {
   const { currentUser } = useAuth();

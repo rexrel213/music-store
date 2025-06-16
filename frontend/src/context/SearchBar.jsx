@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev";
 
 const SearchBar = () => {
   const [query, setQuery] = useState("");

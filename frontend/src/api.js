@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000',  // всегда обращаемся к backend на localhost:8000
+  baseURL: 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev',  // всегда обращаемся к backend на localhost:8000
 });
 
 export default api;

@@ -16,19 +16,23 @@ app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "http://frontend:80",
-        "http://backend:80",
-        "http://localhost:8000",
-        "http://ruslik.taruman.ru"
+        "https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+
+
+
+
 
 # --- ВСТАВЬТЕ ОБРАБОТЧИК ИСКЛЮЧЕНИЙ ЗДЕСЬ ---
 @app.exception_handler(Exception)

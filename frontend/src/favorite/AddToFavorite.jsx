@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Heart, HeartOff, AlertCircle, Check } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const AddToFavoriteButton = ({ product }) => {
   const { currentUser } = useAuth();

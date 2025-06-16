@@ -5,7 +5,7 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const SearchResults = () => {
   const query = useQuery();

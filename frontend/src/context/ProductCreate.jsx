@@ -13,21 +13,21 @@ const ProductAddPage = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/admin/brands')
+    fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/admin/brands')
       .then(res => res.json())
       .then(data => setBrands(data))
       .catch(() => alert('Ошибка загрузки брендов'));
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:8000/admin/categories')
+    fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/admin/categories')
       .then(res => res.json())
       .then(data => setCategories(data.data || []))
       .catch(() => alert('Ошибка загрузки категорий'));
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:8000/admin/music-types')
+    fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/admin/music-types')
       .then(res => res.json())
       .then(data => setMusicTypes(data.data || []))
       .catch(() => alert('Ошибка загрузки музыкальных типов'));
@@ -64,7 +64,7 @@ const ProductAddPage = () => {
         formData.append('image', images[0]);
       }
 
-      const productRes = await fetch('http://localhost:8000/admin/products', {
+      const productRes = await fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/admin/products', {
         method: 'POST',
         body: formData,
       });
@@ -82,7 +82,7 @@ const ProductAddPage = () => {
           imagesFormData.append('files', images[i]);
         }
 
-        const uploadRes = await fetch(`http://localhost:8000/admin/products/${product.id}/images`, {
+        const uploadRes = await fetch(`https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/admin/products/${product.id}/images`, {
           method: 'POST',
           body: imagesFormData,
         });

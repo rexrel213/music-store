@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Heart, Loader2, PackageX, ExternalLink, Trash2 } from 'lucide-react';
 import AddToOrderButton from '../order/AddToOrder';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const Wishlist = () => {
   const { currentUser } = useAuth();

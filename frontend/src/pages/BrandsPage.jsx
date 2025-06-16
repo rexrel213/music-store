@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Loader2, Package } from 'lucide-react';
 
-const BASE_URL = 'http://localhost:8000'; // ваш API эндпоинт
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev'; // ваш API эндпоинт
 
 const BrandsPage = () => {
   const [brands, setBrands] = useState([]);
@@ -73,7 +73,7 @@ const BrandsPage = () => {
           >
             {brand.logo ? (
               <img
-                src={`http://localhost:8000${brand.logo}`}
+                src={`https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev${brand.logo}`}
                 alt={brand.name}
                 className="w-24 h-24 object-contain mb-4"
                 onError={(e) => {

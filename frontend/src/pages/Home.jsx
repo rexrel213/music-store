@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Music, Guitar, Piano, Drum, Mic, Headphones, Star, ArrowRight, TrendingUp, Users, Award, ShoppingBag } from 'lucide-react';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const HomePage = () => {
   const [categories, setCategories] = useState([]);

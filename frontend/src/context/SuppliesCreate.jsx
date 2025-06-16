@@ -7,7 +7,7 @@ const SupplyAddPage = () => {
   const [items, setItems] = useState([{ product_id: '', quantity: 1 }]);
 
   useEffect(() => {
-    fetch('http://localhost:8000/products')
+    fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/products')
       .then(res => res.json())
       .then(data => {
         setProducts(Array.isArray(data) ? data : data.data || []);
@@ -40,7 +40,7 @@ const SupplyAddPage = () => {
     }
 
     try {
-      const res = await fetch('http://localhost:8000/supplies/', {
+      const res = await fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/supplies/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

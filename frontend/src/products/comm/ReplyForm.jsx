@@ -8,7 +8,7 @@ const ReplyForm = ({ commentId, productId, onSuccess }) => {
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
   const handleSubmit = async (e) => {
     e.preventDefault();

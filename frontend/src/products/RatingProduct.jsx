@@ -7,7 +7,7 @@ const ProductRatingInput = ({ productId, onRated }) => {
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
   const handleRate = async (value) => {
     setSubmitting(true);

@@ -5,7 +5,7 @@ import CommentRating from './CommentRatingForm'; // компонент рейт�
 import Avatar from '../../context/Avatar'; // компонент аватара пользователя
 import { useAuth } from '../../context/AuthContext';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const CommentItem = ({ comment, onReplySuccess, level = 0 }) => {
   const [showReplyForm, setShowReplyForm] = useState(false);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import StarRating from '../context/StarRating';
 import { Filter, X, Search, DollarSign, Tag, Music, ChevronDown, SlidersHorizontal, Grid, List, Package } from 'lucide-react';
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
 const ProductsList = () => {
   const [products, setProducts] = useState([]);

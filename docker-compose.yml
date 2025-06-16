@@ -21,7 +21,7 @@ services:
     ports:
       - "3000:80"
     environment:
-      - VITE_API_URL=http://backend:80
+      - VITE_API_URL=https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev
     depends_on:
       - backend
 

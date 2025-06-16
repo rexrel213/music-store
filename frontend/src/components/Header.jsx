@@ -14,7 +14,7 @@ const Header = () => {
   const closeMenu = () => setIsMenuOpen(false);
   const [orderItems, setOrderItems] = useState([]);
   
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
   
   const fetchOrderItems = async () => {
     try {

@@ -1,8 +1,8 @@
-"""init
+"""empty message
 
-Revision ID: 609e5c632005
+Revision ID: 6b33d377c7c4
 Revises: 
-Create Date: 2025-04-25 15:51:57.254417
+Create Date: 2025-06-16 19:35:52.396261
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '609e5c632005'
+revision: str = '6b33d377c7c4'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -45,16 +45,6 @@ def upgrade() -> None:
     sa.UniqueConstraint('name')
     )
     op.create_index(op.f('ix_roles_id'), 'roles', ['id'], unique=False)
-    op.create_table('suppliers',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=150), nullable=False),
-    sa.Column('phone', sa.String(length=20), nullable=False),
-    sa.Column('bank_account', sa.String(length=50), nullable=False),
-    sa.Column('inn', sa.String(length=12), nullable=False),
-    sa.Column('kpp', sa.String(length=9), nullable=False),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_index(op.f('ix_suppliers_id'), 'suppliers', ['id'], unique=False)
     op.create_table('music_types',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=150), nullable=False),
@@ -63,16 +53,10 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_music_types_id'), 'music_types', ['id'], unique=False)
-    op.create_table('supplies',
-    sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('supplier_id', sa.Integer(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), server_default='now()', nullable=True),
-    sa.ForeignKeyConstraint(['supplier_id'], ['suppliers.id'], ),
-    sa.PrimaryKeyConstraint('id')
-    )
-    op.create_index(op.f('ix_supplies_id'), 'supplies', ['id'], unique=False)
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=120), nullable=False),
+    sa.Column('avatar', sa.LargeBinary(), nullable=True),
     sa.Column('email', sa.String(length=120), nullable=False),
     sa.Column('password', sa.String(length=120), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default='now()', nullable=True),
@@ -86,6 +70,8 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default='now()', nullable=True),
+    sa.Column('status', sa.Enum('ORDERED', 'COMPLETED', 'CANCELLED', name='orderstatusenum'), nullable=False),
+    sa.Column('barcode', sa.String(length=255), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -105,17 +91,42 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_products_id'), 'products', ['id'], unique=False)
+    op.create_table('suppliers',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=150), nullable=False),
+    sa.Column('phone', sa.String(length=20), nullable=False),
+    sa.Column('bank_account', sa.String(length=50), nullable=False),
+    sa.Column('inn', sa.String(length=12), nullable=False),
+    sa.Column('kpp', sa.String(length=9), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_suppliers_id'), 'suppliers', ['id'], unique=False)
     op.create_table('comments',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('product_id', sa.Integer(), nullable=False),
     sa.Column('content', sa.Text(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default='now()', nullable=True),
+    sa.Column('rating', sa.Integer(), nullable=False),
+    sa.Column('parent_id', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['parent_id'], ['comments.id'], ),
     sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_comments_id'), 'comments', ['id'], unique=False)
+    op.create_table('favorites',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('product_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['product_id'], ['products.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('user_id', 'product_id', name='unique_user_product_favorite')
+    )
+    op.create_index(op.f('ix_favorites_id'), 'favorites', ['id'], unique=False)
     op.create_table('order_items',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('order_id', sa.Integer(), nullable=False),
@@ -126,6 +137,14 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_order_items_id'), 'order_items', ['id'], unique=False)
+    op.create_table('product_images',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('product_id', sa.Integer(), nullable=False),
+    sa.Column('image_path', sa.String(length=255), nullable=False),
+    sa.ForeignKeyConstraint(['product_id'], ['products.id'], ondelete='CASCADE'),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_product_images_id'), 'product_images', ['id'], unique=False)
     op.create_table('ratings',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -137,6 +156,25 @@ def upgrade() -> None:
     sa.UniqueConstraint('user_id', 'product_id', name='unique_user_product_rating')
     )
     op.create_index(op.f('ix_ratings_id'), 'ratings', ['id'], unique=False)
+    op.create_table('supplies',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('supplier_id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), server_default='now()', nullable=True),
+    sa.ForeignKeyConstraint(['supplier_id'], ['suppliers.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_supplies_id'), 'supplies', ['id'], unique=False)
+    op.create_table('comment_ratings',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('comment_id', sa.Integer(), nullable=False),
+    sa.Column('value', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['comment_id'], ['comments.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('user_id', 'comment_id', name='unique_user_comment_rating')
+    )
+    op.create_index(op.f('ix_comment_ratings_id'), 'comment_ratings', ['id'], unique=False)
     op.create_table('supply_items',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('supply_id', sa.Integer(), nullable=False),
@@ -155,24 +193,30 @@ def downgrade() -> None:
     # ### commands auto generated by Alembic - please adjust! ###
     op.drop_index(op.f('ix_supply_items_id'), table_name='supply_items')
     op.drop_table('supply_items')
+    op.drop_index(op.f('ix_comment_ratings_id'), table_name='comment_ratings')
+    op.drop_table('comment_ratings')
+    op.drop_index(op.f('ix_supplies_id'), table_name='supplies')
+    op.drop_table('supplies')
     op.drop_index(op.f('ix_ratings_id'), table_name='ratings')
     op.drop_table('ratings')
+    op.drop_index(op.f('ix_product_images_id'), table_name='product_images')
+    op.drop_table('product_images')
     op.drop_index(op.f('ix_order_items_id'), table_name='order_items')
     op.drop_table('order_items')
+    op.drop_index(op.f('ix_favorites_id'), table_name='favorites')
+    op.drop_table('favorites')
     op.drop_index(op.f('ix_comments_id'), table_name='comments')
     op.drop_table('comments')
+    op.drop_index(op.f('ix_suppliers_id'), table_name='suppliers')
+    op.drop_table('suppliers')
     op.drop_index(op.f('ix_products_id'), table_name='products')
     op.drop_table('products')
     op.drop_index(op.f('ix_orders_id'), table_name='orders')
     op.drop_table('orders')
     op.drop_index(op.f('ix_users_id'), table_name='users')
     op.drop_table('users')
-    op.drop_index(op.f('ix_supplies_id'), table_name='supplies')
-    op.drop_table('supplies')
     op.drop_index(op.f('ix_music_types_id'), table_name='music_types')
     op.drop_table('music_types')
-    op.drop_index(op.f('ix_suppliers_id'), table_name='suppliers')
-    op.drop_table('suppliers')
     op.drop_index(op.f('ix_roles_id'), table_name='roles')
     op.drop_table('roles')
     op.drop_index(op.f('ix_categories_id'), table_name='categories')

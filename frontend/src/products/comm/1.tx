@@ -18,7 +18,7 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
-  const BASE_URL = 'http://localhost:8000';
+  const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 
   // Функция для загрузки данных о товаре
   const fetchProductData = async () => {

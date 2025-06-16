@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      fetch('http://localhost:8000/login/profile', {
+      fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/profile', {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then(res => {
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   // Регистрация
   const register = async (email, password, name) => {
-    const response = await fetch('http://localhost:8000/register', {
+    const response = await fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/egister', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password, name }),
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('token', data.access_token);
 
     // Получаем профиль пользователя сразу после регистрации
-    const profileRes = await fetch('http://localhost:8000/login/profile', {
+    const profileRes = await fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/login/profile', {
       headers: { Authorization: `Bearer ${data.access_token}` },
     });
     const profileData = await profileRes.json();
@@ -73,7 +73,7 @@ export const AuthProvider = ({ children }) => {
     formData.append('username', email);
     formData.append('password', password);
 
-    const response = await fetch('http://localhost:8000/login', {
+    const response = await fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: formData.toString(),
@@ -88,7 +88,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('token', data.access_token);
 
     // Получаем профиль пользователя сразу после логина
-    const profileRes = await fetch('http://localhost:8000/login/profile', {
+    const profileRes = await fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/login/profile', {
       headers: { Authorization: `Bearer ${data.access_token}` },
     });
     const profileData = await profileRes.json();
@@ -102,7 +102,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
-      fetch('http://localhost:8000/login/profile', {
+      fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/login/profile', {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then(res => {
@@ -128,7 +128,7 @@ export const AuthProvider = ({ children }) => {
   // Обновление профиля (например, имя, email, аватар)
   const updateUser = async (userData) => {
     try {
-      const response = await fetch('http://localhost:8000/login/profile', {
+      const response = await fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/login/profile', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ export const AuthProvider = ({ children }) => {
     formData.append("file", file);
   
     try {
-      const response = await fetch("http://localhost:8000/login/profile/avatar", {
+      const response = await fetch("https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/login/profile/avatar", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -172,7 +172,7 @@ export const AuthProvider = ({ children }) => {
       }
   
       // После загрузки обновляем профиль
-      const profileRes = await fetch("http://localhost:8000/login/profile", {
+      const profileRes = await fetch("https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/login/profile", {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
       const profileData = await profileRes.json();
@@ -199,7 +199,7 @@ export const AuthProvider = ({ children }) => {
     if (!window.confirm("Are you sure you want to delete your profile?")) return;
     setIsDeleting(true);
     try {
-      const response = await fetch('http://localhost:8000/login/profile', {
+      const response = await fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/login/profile', {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
