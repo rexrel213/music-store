@@ -1,4 +1,3 @@
-version: '3.8'  # Добавьте версию Compose
 services:
   backend:
     build:
@@ -11,8 +10,6 @@ services:
       DATABASE_URL: postgresql+asyncpg://postgres:81194@db:5432/music_store
     depends_on:
       - db
-    volumes:
-      - ./backend:/app  # Локальное монтирование нужно только для разработки
 
   frontend:
     build:
@@ -30,9 +27,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: music_store
-      POSTGRES_PASSWORD: "81194"  # Пароль в кавычках
-    ports:
-      - "5433:5432"
+      POSTGRES_PASSWORD: "81194"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -40,11 +35,11 @@ services:
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: "admin"  # Пароль в кавычках
+      PGADMIN_DEFAULT_PASSWORD: "admin"
     ports:
       - "5050:80"
     depends_on:
       - db
 
 volumes:
-  pgdata:  # Исправлен отступ
+  pgdata:
