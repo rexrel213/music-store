@@ -1,3 +1,4 @@
+version: '3.8'  # Добавьте версию Compose
 services:
   backend:
     build:
@@ -5,20 +6,20 @@ services:
       dockerfile: Dockerfile
     command: uvicorn app.main:app --host 0.0.0.0 --port 80 --reload --log-level debug
     ports:
-      - 8000:80
+      - "8000:80"
     environment:
       DATABASE_URL: postgresql+asyncpg://postgres:81194@db:5432/music_store
     depends_on:
       - db
     volumes:
-      - ./backend:/app
+      - ./backend:/app  # Локальное монтирование нужно только для разработки
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - 3000:80
+      - "3000:80"
     environment:
       VITE_API_URL: http://backend:80
     depends_on:
@@ -29,9 +30,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_DB: music_store
-      POSTGRES_PASSWORD: 81194
+      POSTGRES_PASSWORD: "81194"  # Пароль в кавычках
     ports:
-      - 5433:5432
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -39,11 +40,11 @@ services:
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_DEFAULT_PASSWORD: "admin"  # Пароль в кавычках
     ports:
-      - 5050:80
+      - "5050:80"
     depends_on:
       - db
 
 volumes:
-  pgdata:
+  pgdata:  # Исправлен отступ
