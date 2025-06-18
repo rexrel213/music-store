@@ -24,10 +24,8 @@ import SuppliesCreate from './context/SuppliesCreate.jsx';
 import CategoryPage from './pages/CategoryPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
-import SoldProducts from '.pages/SoldProduct.jsx';
-
-
-
+import SoldProducts from './pages/SoldProduct.jsx';
+import UmamiDashboard from './context/Statica.jsx';
 
 
 
@@ -62,9 +60,10 @@ function App() {
           <Route path="/brands" element={<BrandsPage />} />
           <Route path="/supplies/create" element={<SuppliesCreate />} />
           <Route path="/category/:categoryId" element={<CategoryPage />} />
-          <Route path="/admin/sold-product" element={<SoldProduct />} />
+          <Route path="/admin/sold-product" element={<SoldProducts />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/static" element={<UmamiDashboard />} />
           {/* <Route path="/products/:productId/commentfrom" element={<CommentForm />} /> */}
           <Route path="/products/:productId/commenttools/:commentId" element={<CommentItem />} />
           <Route path="/products/:productId/commenttools/:commentId/rating" element={<CommentRating />} />

@@ -1,4 +1,4 @@
-
+version: "3.8"
 
 services:
   backend:
@@ -13,7 +13,6 @@ services:
       - db
     volumes:
       - ./backend:/app  
-
 
   frontend:
     build: ./frontend
@@ -36,6 +35,11 @@ services:
       - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   pgadmin:
     image: dpage/pgadmin4
@@ -51,6 +55,6 @@ services:
       - db
 
 
-
 volumes:
   pgdata:
+

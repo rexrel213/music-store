@@ -156,14 +156,24 @@ const Header = () => {
             Отличные инструменты
           </NavLink>
           {currentUser?.role_id === 1 && (
-            <NavLink
-              to="/products/create"
-              className={`transition-colors hover:text-[#9E1946] ${
-                location.pathname === '/products/create' ? 'text-[#9E1946] font-medium' : 'text-[#1A2238]'
-              }`}
-            >
-              Админ-панель
-            </NavLink>
+            <>
+              <NavLink
+                to="/products/create"
+                className={`transition-colors hover:text-[#9E1946] ${
+                  location.pathname === '/products/create' ? 'text-[#9E1946] font-medium' : 'text-[#1A2238]'
+                }`}
+              >
+                Админ-панель
+              </NavLink>
+              <NavLink
+                to="/admin/sold-product"
+                className={`transition-colors hover:text-[#9E1946] ${
+                  location.pathname === '/another-path' ? 'text-[#9E1946] font-medium' : 'text-[#1A2238]'
+                }`}
+              >
+                Продажи
+              </NavLink>
+            </>
           )}
           {currentUser?.role_id === 4 && (
             <NavLink

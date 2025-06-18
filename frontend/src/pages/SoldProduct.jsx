@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-
+const BASE_URL = 'https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev';
 function SoldProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("/admin/sold-products")
+    fetch(`${BASE_URL}/admin/sold-products`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Ошибка: ${response.status}`);
