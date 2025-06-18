@@ -50,6 +50,29 @@ def apply_sort(query, model, sort: str):
             query = query.order_by(sort_column)
     return query
 
+
+# ======================== Продажи ========================
+@router.get("/sold-products", response_model=List[SoldProduct])
+async def get_sold_products(db: AsyncSession = Depends(get_db)):
+    query = (
+        select(
+            Product.id,
+            Product.title,
+            func.sum(OrderItem.quantity).label("total_sold")
+        )
+        .join(OrderItem, Product.id == OrderItem.product_id)
+        .join(Order, OrderItem.order_id == Order.id)
+        .where(Order.status == "Оплачено")
+        .group_by(Product.id, Product.title)
+        .order_by(func.sum(OrderItem.quantity).desc())
+    )
+    result = await db.execute(query)
+    sold_products = result.all()
+    return [
+        SoldProduct(id=r.id, title=r.title, total_sold=r.total_sold)
+        for r in sold_products
+    ]
+
 # ======================== Поставщики ========================
 
 @router.get("/suppliers", response_model=SupplierListResponse)
