@@ -20,8 +20,9 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",
-        "https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev",
+    "http://localhost:3000",
+    "https://studious-tribble-x54px9gpxjrp2v96v-3000.app.github.dev",
+    "https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev"
     ],
     allow_credentials=True,
     allow_methods=["*"],

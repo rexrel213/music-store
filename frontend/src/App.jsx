@@ -24,6 +24,7 @@ import SuppliesCreate from './context/SuppliesCreate.jsx';
 import CategoryPage from './pages/CategoryPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import ContactPage from './pages/ContactPage.jsx';
+import SoldProducts from '.pages/SoldProduct.jsx';
 
 
 
@@ -61,6 +62,7 @@ function App() {
           <Route path="/brands" element={<BrandsPage />} />
           <Route path="/supplies/create" element={<SuppliesCreate />} />
           <Route path="/category/:categoryId" element={<CategoryPage />} />
+          <Route path="/admin/sold-product" element={<SoldProduct />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           {/* <Route path="/products/:productId/commentfrom" element={<CommentForm />} /> */}

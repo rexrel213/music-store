@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
   // Регистрация
   const register = async (email, password, name) => {
-    const response = await fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/egister', {
+    const response = await fetch('https://studious-tribble-x54px9gpxjrp2v96v-8000.app.github.dev/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password, name }),
