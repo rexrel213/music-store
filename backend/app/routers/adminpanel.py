@@ -22,7 +22,7 @@ from app.schemas import (
     OrderRead, OrderListResponse,
     RatingCreate, RatingRead,
     SupplyCreate, SupplyRead, SupplyListResponse, SupplyItemRead, SupplyItemCreate,   
-    OrderItemRead, OrderItemCreate
+    OrderItemRead, OrderItemCreate, SoldProduct
 )
 
 router = APIRouter(
