@@ -30,8 +30,11 @@ class UserUpdate(BaseModel):
     password: PasswordUpdate | None = None 
 
 
-
-
+# --- Продажи ---
+class SoldProduct(BaseModel):
+    id: int
+    title: str
+    total_sold: int
 # --- Бренды ---
 
 class BrandCreate(BaseModel):
